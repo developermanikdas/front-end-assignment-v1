@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { BookOpen, Layers, Clock, Award, Users, BarChart3 } from "lucide-react";
 
 export function AccredianEdge() {
@@ -43,7 +43,7 @@ export function AccredianEdge() {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -52,7 +52,7 @@ export function AccredianEdge() {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 25 },
     visible: {
       opacity: 1,

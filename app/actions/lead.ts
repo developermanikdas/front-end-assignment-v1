@@ -10,7 +10,7 @@ export async function submitLead(formData: LeadFormInput): Promise<ServerActionR
   const validationResult = leadFormSchema.safeParse(formData);
 
   if (!validationResult.success) {
-    const errorMsg = validationResult.error.errors
+    const errorMsg = validationResult.error.issues
       .map((err) => `${err.path.join(".")}: ${err.message}`)
       .join("; ");
     return {

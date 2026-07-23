@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { BookOpen, Laptop, BarChart4, ArrowRight } from "lucide-react";
 
 export function CATFramework() {
@@ -28,7 +28,7 @@ export function CATFramework() {
     },
   ];
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: { scaleX: 0 },
     visible: { scaleX: 1, transition: { duration: 0.8, ease: "easeInOut", delay: 0.3 } },
   };
