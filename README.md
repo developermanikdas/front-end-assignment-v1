@@ -13,9 +13,9 @@ This project features a clean modular architecture, manual dark/light theme swit
 
 ---
 
-## 🌟 Key Highlights & Standout Practices (Why this submission stands out)
+## 🌟 Key Highlights 
 
-This submission demonstrates **Senior-level Full-Stack practices** beyond a simple front-end copy:
+This demonstrates **Senior-level Full-Stack practices** beyond a simple front-end copy:
 
 1. **Strict B2B Domain Validation:** The Zod form validator actively filters out consumer email providers (e.g., Gmail, Yahoo, Hotmail). Users must supply a valid corporate work email address, mirroring enterprise SaaS best practices.
 2. **Double-Ended Validation & Timeout Safety:** Input validation runs both client-side (for instant UI feedback) and server-side in a Next.js Server Action. Webhook requests to Google Sheets are protected with an `AbortController` timeout to prevent serverless function hangs.
@@ -91,7 +91,7 @@ Ensure you have **Node.js (v18.17.0 or higher)** installed.
 
 ### 1. Clone the repository
 ```bash
-git clone <github-repository-url>
+git clone https://github.com/developermanikdas/front-end-assignment-v1.git
 cd full-stack-assignment
 ```
 
