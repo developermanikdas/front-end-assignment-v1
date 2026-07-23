@@ -10,14 +10,44 @@ import { CATFramework } from "./components/sections/CATFramework";
 import { FAQSection } from "./components/sections/FAQSection";
 import { Testimonials } from "./components/sections/Testimonials";
 import { Footer } from "./components/sections/Footer";
-import { LeadCaptureModal } from "./components/forms/LeadCaptureModal";
+import dynamic from "next/dynamic";
 import { Button } from "./components/ui/button";
+
+const LeadCaptureModal = dynamic(
+  () => import("./components/forms/LeadCaptureModal").then((mod) => mod.LeadCaptureModal),
+  { ssr: false }
+);
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Accredian Enterprise",
+    "url": "https://front-end-assignment-v1.vercel.app/",
+    "logo": "https://front-end-assignment-v1.vercel.app/hero_illustration.jpg",
+    "description": "Empower your teams with outcome-driven, industry-relevant curriculum. Standardize capability in Product Management, Data Science, AI/ML, and Software Systems.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Noida",
+      "addressRegion": "UP",
+      "addressCountry": "India",
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-98765-43210",
+      "contactType": "customer service",
+      "email": "enterprise@accredian.com",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Sticky Navigation header */}
       <Navbar onRequestDemo={() => setIsModalOpen(true)} />
 

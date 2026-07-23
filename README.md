@@ -22,6 +22,9 @@ This demonstrates **Senior-level Full-Stack practices** beyond a simple front-en
 3. **Resilient Filesystem Logging:** In read-only serverless runtimes (like Vercel), file system operations fail with `EROFS`. The Server Action handles this gracefully—falling back to the `/tmp` temporary storage and syncing with Google Sheets so the UI never crashes for the user.
 4. **Zero-Overhead Tailwind v4 Theme Switcher:** Configured manual class-based dark mode by injecting custom CSS variants directly into Tailwind v4 without needing a bulky v3 configuration file.
 5. **Next.js 16 Asynchronous Standards:** Developed in compliance with Next.js 16 patterns, treating route parameters and headers as asynchronous Promises.
+6. **Unified REST API Endpoint:** Exposed a dedicated backend REST API route at `POST /api/leads` that runs the same schema validations and hooks, allowing external client requests to log leads programmatically.
+7. **Production Performance Tuning:** Implemented Next.js lazy-loading dynamic imports (`next/dynamic`) for the Lead Capture Modal to split code bundles, reducing the initial JavaScript payload. Optimized Hero image priority sizes to eliminate layout shifts (CLS) and ensure fast page paint metrics.
+8. **Comprehensive SEO Engineering:** Embedded dynamic sitemap routing (`/sitemap.xml`), robot crawler rules (`/robots.txt` disallowing API routes), and structured JSON-LD schemas identifying the page as an Educational Organization, maximizing organic search index quality.
 
 ---
 
@@ -62,6 +65,9 @@ Rather than using volatile in-memory stores that wipe out on server reboots, the
 ├── actions/             # Next.js Server Actions
 │   └── lead.ts          # Server-side validation and file DB write
 ├── app/
+│   ├── api/             # REST API Routes
+│   │   └── leads/
+│   │       └── route.ts # Lead submission API endpoint
 │   ├── components/      # React Components
 │   │   ├── forms/       # Lead capture form components
 │   │   ├── sections/    # Modular landing page sections
@@ -73,7 +79,9 @@ Rather than using volatile in-memory stores that wipe out on server reboots, the
 │   ├── globals.css      # Tailwind v4 directives and CSS variables
 │   ├── layout.tsx       # Root layout wrapping Context Providers
 │   ├── page.tsx         # Assembled enterprise landing page
-│   └── providers.tsx    # Theme & Toast providers wrapper
+│   ├── providers.tsx    # Theme & Toast providers wrapper
+│   ├── sitemap.ts       # Dynamic SEO sitemap generator
+│   └── robots.ts        # Dynamic SEO robots crawler config
 ├── public/              # Static assets (Hero image, logos)
 ├── data/                # Server storage directory
 │   ├── leads.json       # Simulated local JSON database
