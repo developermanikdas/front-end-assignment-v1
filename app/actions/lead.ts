@@ -76,6 +76,36 @@ export async function submitLead(formData: LeadFormInput): Promise<ServerActionR
       await fs.appendFile(csvPath, csvRow, "utf-8");
     }
 
+    // 6. Submit to Google Sheet if webhook URL is defined in Environment Variables
+    const sheetWebhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+    if (sheetWebhookUrl) {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+        await fetch(sheetWebhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            id: newLead.id,
+            name: newLead.name,
+            email: newLead.email,
+            companySize: newLead.companySize,
+            phone: newLead.phone,
+            message: newLead.message || "",
+            submittedAt: newLead.submittedAt,
+          }),
+          signal: controller.signal,
+        });
+        clearTimeout(timeoutId);
+      } catch (sheetError) {
+        console.error("Failed to sync lead submission to Google Sheet:", sheetError);
+        // Fail-silent: don't block local success if external Google Sheet fails
+      }
+    }
+
     return {
       success: true,
       data: newLead,

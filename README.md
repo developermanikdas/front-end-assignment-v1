@@ -7,8 +7,8 @@ This project features a clean modular architecture, manual dark/light theme swit
 ---
 
 ## 🚀 Live Demo & Repository
-* **Live Deployment (Vercel):** [Insert Vercel Link Here]
-* **GitHub Repository:** [Insert GitHub Repo Link Here]
+* **Live Deployment (Vercel):** https://front-end-assignment-v1.vercel.app/
+* **GitHub Repository:** https://github.com/developermanikdas/front-end-assignment-v1
 
 ---
 
@@ -99,6 +99,51 @@ Verify TypeScript and ESLint compilations before staging:
 ```bash
 npm run build
 ```
+
+### 5. Google Sheets Integration Setup (Optional)
+To submit lead entries directly into a Google Sheet spreadsheet:
+1. Open your target **Google Sheet**.
+2. Click **Extensions > Apps Script** in the top menu.
+3. Paste the following Apps Script code into the script editor:
+   ```javascript
+   function doPost(e) {
+     try {
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       var data = JSON.parse(e.postData.contents);
+       
+       // Add headers if sheet is empty
+       if (sheet.getLastRow() === 0) {
+         sheet.appendRow(["ID", "Name", "Email", "Company Size", "Phone", "Message", "Submitted At"]);
+       }
+       
+       sheet.appendRow([
+         data.id,
+         data.name,
+         data.email,
+         data.companySize,
+         data.phone,
+         data.message || "",
+         data.submittedAt
+       ]);
+       
+       return ContentService.createTextOutput(JSON.stringify({ success: true }))
+         .setMimeType(ContentService.MimeType.JSON);
+     } catch (error) {
+       return ContentService.createTextOutput(JSON.stringify({ success: false, error: error.toString() }))
+         .setMimeType(ContentService.MimeType.JSON);
+     }
+   }
+   ```
+4. Click **Deploy > New Deployment** (top right).
+5. Click the gear icon next to "Select type" and select **Web App**.
+6. Set the parameters:
+   * **Execute as:** `Me (your email address)`
+   * **Who has access:** `Anyone` (this lets your Next.js Server Action post data anonymously)
+7. Click **Deploy** and copy the generated **Web App URL**.
+8. Add this URL as an environment variable named **`GOOGLE_SHEET_WEBHOOK_URL`** in your Vercel Project Dashboard (or add `GOOGLE_SHEET_WEBHOOK_URL="your-copied-url"` to a local `.env.local` file for local development).
+9. Restart your dev server or redeploy on Vercel.
+
+📊 **Google Sheet Database Link:** [PASTE_YOUR_GOOGLE_SHEET_LINK_HERE]
 
 ---
 
