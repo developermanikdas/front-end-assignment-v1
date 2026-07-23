@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1ed7a4dd-6164-42bf-bbf2-9c8571d4c97c",
+    "name": "test",
+    "email": "nelidi2048@lasttea.com",
+    "companySize": "1-10",
+    "phone": "9873216451",
+    "message": "",
+    "submittedAt": "2026-07-23T06:40:20.682Z"
+  },
+  {
+    "id": "49fff0cb-e8a3-4ed6-b34d-730a9857d38e",
+    "name": "test2",
+    "email": "test2@gsn.jdo",
+    "companySize": "51-200",
+    "phone": "9887654321",
+    "message": "",
+    "submittedAt": "2026-07-23T06:43:15.088Z"
+  }
+]
