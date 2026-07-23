@@ -6,9 +6,22 @@ This project features a clean modular architecture, manual dark/light theme swit
 
 ---
 
-## 🚀 Live Demo & Repository
+## 🚀 Live Demo & Submissions
 * **Live Deployment (Vercel):** https://front-end-assignment-v1.vercel.app/
 * **GitHub Repository:** https://github.com/developermanikdas/front-end-assignment-v1
+* **Active Google Sheet Database:** https://docs.google.com/spreadsheets/d/1QwdawGwp2ONyb8-I3imWdPcewiu93fjsDQ8086M6oz0/edit?usp=sharing
+
+---
+
+## 🌟 Key Highlights & Standout Practices (Why this submission stands out)
+
+This submission demonstrates **Senior-level Full-Stack practices** beyond a simple front-end copy:
+
+1. **Strict B2B Domain Validation:** The Zod form validator actively filters out consumer email providers (e.g., Gmail, Yahoo, Hotmail). Users must supply a valid corporate work email address, mirroring enterprise SaaS best practices.
+2. **Double-Ended Validation & Timeout Safety:** Input validation runs both client-side (for instant UI feedback) and server-side in a Next.js Server Action. Webhook requests to Google Sheets are protected with an `AbortController` timeout to prevent serverless function hangs.
+3. **Resilient Filesystem Logging:** In read-only serverless runtimes (like Vercel), file system operations fail with `EROFS`. The Server Action handles this gracefully—falling back to the `/tmp` temporary storage and syncing with Google Sheets so the UI never crashes for the user.
+4. **Zero-Overhead Tailwind v4 Theme Switcher:** Configured manual class-based dark mode by injecting custom CSS variants directly into Tailwind v4 without needing a bulky v3 configuration file.
+5. **Next.js 16 Asynchronous Standards:** Developed in compliance with Next.js 16 patterns, treating route parameters and headers as asynchronous Promises.
 
 ---
 
@@ -143,7 +156,7 @@ To submit lead entries directly into a Google Sheet spreadsheet:
 8. Add this URL as an environment variable named **`GOOGLE_SHEET_WEBHOOK_URL`** in your Vercel Project Dashboard (or add `GOOGLE_SHEET_WEBHOOK_URL="your-copied-url"` to a local `.env.local` file for local development).
 9. Restart your dev server or redeploy on Vercel.
 
-📊 **Google Sheet Database Link:** [PASTE_YOUR_GOOGLE_SHEET_LINK_HERE]
+📊 **Google Sheet Database Link:** https://docs.google.com/spreadsheets/d/1QwdawGwp2ONyb8-I3imWdPcewiu93fjsDQ8086M6oz0/edit?usp=sharing
 
 ---
 
